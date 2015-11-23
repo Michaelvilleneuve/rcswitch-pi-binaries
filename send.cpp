@@ -1,6 +1,13 @@
 /*
+Switch on/off usage : 
  Usage: ./send <systemCode> <unitCode> <command>
  Command is 0 for OFF and 1 for ON
+Hexa usage : 
+ Usage: ./send <systemCode> <pulse> <bit>
+ Bit must be different from 0, 1, and 2, so the program uses hexa instead of Switch On/off or binary
+Binary usage : 
+ Usage: ./send <systemCode> <pulse> 2
+ Last argument must be set to 2 so the program uses binary instead of Switch On/off or hexa	
  */
 
 #include "RCSwitch.h"
@@ -41,6 +48,10 @@ int main(int argc, char *argv[]) {
             break;
         case 0:
             mySwitch.switchOff(systemCode, unitCode);
+            break;
+	case 2:
+             mySwitch.setPulseLength(pulse);
+             mySwitch.send(systemCode);
             break;
 	default:
              mySwitch.setPulseLength(pulse);
